@@ -76,6 +76,23 @@ class MyApp extends StatelessWidget {
               ],
             )
         ),
+        floatingActionButton: FloatingActionButton(
+          // When the user presses the button, show an alert dialog containing
+          // the text that the user has entered into the text field.
+          onPressed: () {
+            return showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  // Retrieve the text the that user has entered by using the
+                  // TextEditingController.
+                  content: Text('Welcome'),
+                );
+              },
+            );
+          },
+          child: Icon(Icons.arrow_forward),
+        ),
       ),
     );
   }
