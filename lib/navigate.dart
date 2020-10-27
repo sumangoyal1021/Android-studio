@@ -16,6 +16,37 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Main Page'),
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: <Color>[
+                  Colors.deepOrangeAccent,
+                  Colors.deepPurpleAccent
+                ])
+              ),
+              child: Text('This is main page'),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage()));
+              },
+            ),
+            CustomListTitle(),
+            ListTile(
+              title: Text('Contact'),
+            ),
+            ListTile(
+              title: Text('About'),
+            ),
+            ListTile(
+              title: Text('Portfolio'),
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -35,13 +66,29 @@ class MainPage extends StatelessWidget {
     );
   }
 }
+
+class CustomListTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        child: Row(
+          children: <Widget>[
+            Icon(Icons.person),
+            Text('profile'),
+            Icon(Icons.arrow_right)
+          ],
+        )
+    );
+  }
+}
+
 class SubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sub Page'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.black,
       ),
       body: Center(
         child: Column(
@@ -50,7 +97,7 @@ class SubPage extends StatelessWidget {
             Text('Click button to back to Main Page'),
             RaisedButton(
               textColor: Colors.white,
-              color: Colors.redAccent,
+              color: Colors.black,
               child: Text('Back to Main Page'),
               onPressed: () {
                 Navigator.pop(context);
@@ -62,3 +109,4 @@ class SubPage extends StatelessWidget {
     );
   }
 }
+

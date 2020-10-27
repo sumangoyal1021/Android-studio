@@ -8,11 +8,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text('Rows'),
-          centerTitle: true,
-          backgroundColor: Colors.teal[900]
-      ),
+
       body: Container(
        child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
