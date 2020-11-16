@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget{
+
+  final auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context){
         Color hexToColor(String code) {
@@ -33,12 +39,8 @@ class MyApp extends StatelessWidget{
                                 ),
                                 //fillColor: Colors.green
                               ),
-                              validator: (val) {
-                                if(val.length==0) {
-                                  return "Email cannot be empty";
-                                }else{
-                                  return null;
-                                }
+                              onChanged: (value) {
+                                 email = value;
                               },
                               keyboardType: TextInputType.emailAddress,
                               style: new TextStyle(
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget{
                               width: 100,
                             ),
                             new TextFormField(
+                              obscureText: true,
                               decoration: new InputDecoration(
                                 labelText: "Enter password",
                                 fillColor: Colors.white,
@@ -60,12 +63,8 @@ class MyApp extends StatelessWidget{
                                 ),
                                 //fillColor: Colors.green
                               ),
-                              validator: (val) {
-                                if(val.length==0) {
-                                  return "password cannot be empty";
-                                }else{
-                                  return null;
-                                }
+                              onChanged: (value) {
+                                password = value;
                               },
                               keyboardType: TextInputType.emailAddress,
                               style: new TextStyle(
@@ -79,8 +78,19 @@ class MyApp extends StatelessWidget{
                               textColor: Colors.white,
                               color: Colors.brown,
                               child: Text('Confirm'),
-                              onPressed: () {
+                              onPressed: () async {
 //                                Navigator.push(context, MaterialPageRoute(builder: (context) => SubPage()));
+                               try {
+                                  final newUser = await auth
+                                      .createUserWithEmailAndPassword(
+                                      email: email, password: password);
+                                  if (newUser != null) {
+                                     print('Error Occured');
+                                  }
+                                }
+                                catch (e) {
+                                  print(e);
+                                }
                               },
                             ),
                           ]
@@ -92,3 +102,5 @@ class MyApp extends StatelessWidget{
     );
   }
 }
+
+
